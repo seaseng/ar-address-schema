@@ -28,3 +28,38 @@ task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
 
+
+desc 'Contacts Data'
+task "db:seed" do
+  100.times do
+    contact = Contact.new
+    until contact.valid?
+      contact = Contact.new(  :name => Faker::Name.first_name,
+                              :email => Faker::Internet.email,
+                              :phone => Faker::PhoneNumber.phone_number,
+                              :address => Faker::Address.street_address)
+    end
+    contact.save
+
+  end
+end
+
+# desc 'Map Students'
+# task "db:assign_student" do
+#   ids1 = Teacher.pluck(:id)
+#   ids2 = Student.pluck(:id)
+
+#   100.times do
+#     StudentTeacher.create(teacher_id: ids1.sample, student_id: ids2.sample)
+#   end
+# end
+
+desc 'Driver Code'
+task "db:driver" do
+  dude1 = Contact.find(28)
+  dude2 = Contact.find(1)
+
+  p dude2.name
+  p dude1.name
+
+end
