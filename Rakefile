@@ -34,10 +34,10 @@ task "db:seed" do
   100.times do
     contact = Contact.new
     until contact.valid?
-      contact = Contact.new(  :name => Faker::Name.first_name,
+      contact = Contact.new(  :first_name => Faker::Name.first_name,
                               :email => Faker::Internet.email,
-                              :phone => Faker::PhoneNumber.phone_number,
-                              :address => Faker::Address.street_address)
+                              :phone_number => Faker::PhoneNumber.phone_number,
+                              :company => Faker::Company.name)
     end
     contact.save
 
